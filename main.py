@@ -30,7 +30,7 @@ def error_handling(line):  # error handling
         error += 'D'
     if not valid_time:
         error += 'T'
-    return [error, line]
+    return [error, line]  # returns the error
 
 
 def invalid_email(email):  # validating email
@@ -44,18 +44,18 @@ def invalid_email(email):  # validating email
         return False
 
 
-def invalid_phone(phone):
+def invalid_phone(phone):   # validates the phone number
     regex = re.compile(r'^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$')
-    if re.fullmatch(regex, phone):
+    if re.fullmatch(regex, phone): # if it matches the format it's valid
         print("This phone number is valid")
         return True
     else:
-        print("This phone number is invalid")
+        print("This phone number is invalid") # returns false if it doesn't match the format
         return False
 
 
-def invalid_id(num):
-    if num.isdigit():
+def invalid_id(num): # validates ID
+    if num.isdigit(): # makes sure it's a number
         print("This id is valid")
         return True
     else:
@@ -64,27 +64,27 @@ def invalid_id(num):
 
 
 def invalid_name(name):
-    names = name.split(',')
+    names = name.split(',') # splits the name so it validates first and last
     if len(names) != 2 or not names[0].isalpha() or not names[1].isalpha():
-        print("This name is invalid")
+        print("This name is invalid") # if false returns invalid
         return False
     else:
-        print("This name is valid")
+        print("This name is valid")  # if true returns valid
         return True
 
 
-def validate_date(date):
-    pattern_str = re.compile(r'^\d{2}/\d{2}/\d{4}$')
-    if re.fullmatch(pattern_str, date):
+def validate_date(date): # validates date
+    pattern_str = re.compile(r'^\d{2}/\d{2}/\d{4}$')  # format for the date
+    if re.fullmatch(pattern_str, date):  # if date matches format return true
         print("This date is valid")
         return True
     else:
-        print("This date is invalid")
+        print("This date is invalid") # if date doesn't match format return false
         return False
 
 
 def validate_time(time):
-    # Compile the ReGex
+    # regex format for time
     p = re.compile("^([01]?[0-9]|2[0-3]):[0-5][0-9]$")
 
     # Pattern class contains matcher() method
@@ -105,7 +105,7 @@ def validate_time(time):
 valid = []
 invalid = []
 
-with open('NotValidated.csv', newline='') as file:
+with open('NotValidated.csv', newline='') as file: # opening multiple CSV files at at a time
     # reading the CSV file
     csvFile = csv.reader(file, delimiter='|')
 
