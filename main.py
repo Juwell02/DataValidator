@@ -2,23 +2,23 @@ import csv
 import re
 
 
-def error_handling(line):
+def error_handling(line):  # error handling
     error = ''
-    valid_email = invalid_email(line[2])
-    valid_phone = invalid_phone(line[3])
+    valid_email = invalid_email(line[2])  # error handling for email
+    valid_phone = invalid_phone(line[3])  # error handling for phone
     if valid_phone is True:
-        line[3] = line[3].replace('-', '.')
-    valid_date = validate_date(line[4])
+        line[3] = line[3].replace('-', '.')  # replacing the period with the dash
+    valid_date = validate_date(line[4])  # error handling for the date
     if valid_date is True:
-        list_date = line[4].split('/')
+        list_date = line[4].split('/')  # separates date with dash
         line[4] = list_date[2] + '-' + list_date[0] + '-' + list_date[1]
-    valid_time = validate_time(line[5])
-    valid_id = invalid_id(line[0])
-    valid_name = invalid_name(line[1])
+    valid_time = validate_time(line[5])  # error handling for time
+    valid_id = invalid_id(line[0])  # error handling for ID
+    valid_name = invalid_name(line[1]) # error handling for name
     if valid_name is True:
-        list_name = line[1].split(',')
+        list_name = line[1].split(',') # validates both last and first name
         line[1] = list_name[1] + "," + list_name[0]
-    if not valid_id:
+    if not valid_id:  # error codes
         error += 'I'
     if not valid_name:
         error += 'N'
@@ -33,15 +33,14 @@ def error_handling(line):
     return [error, line]
 
 
-def invalid_email(email):
+def invalid_email(email):  # validating email
     regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
 
-
     if re.fullmatch(regex, email):
-        print("This email is valid")
+        print("This email is valid") # states email is valid
         return True
     else:
-        print("This email is invalid")
+        print("This email is invalid") # states email is invalid
         return False
 
 
