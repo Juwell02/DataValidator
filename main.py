@@ -1,9 +1,9 @@
 import csv
 import re
 
+
 def error_handling(line):
     error = ''
-    print(line)
     valid_email = invalid_email(line[2])
     valid_phone = invalid_phone(line[3])
     if valid_phone is True:
@@ -11,7 +11,7 @@ def error_handling(line):
     valid_date = validate_date(line[4])
     if valid_date is True:
         list_date = line[4].split('/')
-        line[4] = list_date[2]+'-'+list_date[0]+'-'+list_date[1]
+        line[4] = list_date[2] + '-' + list_date[0] + '-' + list_date[1]
     valid_time = validate_time(line[5])
     valid_id = invalid_id(line[0])
     valid_name = invalid_name(line[1])
@@ -33,46 +33,56 @@ def error_handling(line):
     return [error, line]
 
 
-
-
-
 def invalid_email(email):
     regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
+
+
     if re.fullmatch(regex, email):
+        print("This email is valid")
         return True
     else:
+        print("This email is invalid")
         return False
 
 
 def invalid_phone(phone):
     regex = re.compile(r'^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$')
     if re.fullmatch(regex, phone):
+        print("This phone number is valid")
         return True
     else:
+        print("This phone number is invalid")
         return False
 
 
 def invalid_id(num):
     if num.isdigit():
+        print("This id is valid")
         return True
     else:
+        print("This id is invalid")
         return False
 
 
 def invalid_name(name):
     names = name.split(',')
     if len(names) != 2 or not names[0].isalpha() or not names[1].isalpha():
+        print("This name is invalid")
         return False
     else:
+        print("This name is valid")
         return True
 
 
 def validate_date(date):
     pattern_str = re.compile(r'^\d{2}/\d{2}/\d{4}$')
     if re.fullmatch(pattern_str, date):
+        print("This date is valid")
         return True
     else:
+        print("This date is invalid")
         return False
+
 
 def validate_time(time):
     # Compile the ReGex
@@ -86,8 +96,10 @@ def validate_time(time):
     # Return True if the time
     # matched the ReGex otherwise False
     if m is not None:
+        print("This time is valid")
         return True
     else:
+        print("This time is invalid")
         return False
 
 
@@ -107,7 +119,7 @@ with open('NotValidated.csv', newline='') as file:
             valid.append(result[1])
 
 with open('validated.csv', 'w') as valid_file, \
-     open('invalid.csv', 'w') as invalid_file:
+        open('invalid.csv', 'w') as invalid_file:
     for line in valid:
         valid_file.write(','.join(line))
     for line in invalid:
